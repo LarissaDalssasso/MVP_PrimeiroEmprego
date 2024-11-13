@@ -387,7 +387,7 @@
     <body>
     
     <nav class="navbar">
-        <a href="https://primeiroemprego.com" class="navbar-brand">PrimeiroEmprego</a>
+        <a href="https://primeiroemprego.com" class="navbar-brand">Primeiro Emprego</a>
         <div class="nav-links">
             <a href="https://primeiroemprego.com/sobre" class="nav-link">Sobre</a>
             <a href="https://primeiroemprego.com/suporte" class="nav-link">Suporte</a>
@@ -395,7 +395,7 @@
     </nav>
     
     <div class="tab-container" id="mainContent">
-        <h1 class="welcome-title">Bem-vindo ao PrimeiroEmprego.com</h1>
+        <h1 class="welcome-title">Bem-vindo ao PrimeiroEmprego</h1>
         
         <div class="portal-options">
             <a href="https://primeiroemprego.com/empresa" class="portal-card">
@@ -438,12 +438,7 @@
                     <label>Endereço</label>
                     <input type="text" class="form-control" id="companyAddress" required>
                 </div>
-                <div class="form-group">
-                    <label>Localização no Mapa</label>
-                    <div id="map" style="height: 300px; width: 100%; margin-bottom: 1rem;"></div>
-                    <input type="hidden" id="companyLat">
-                    <input type="hidden" id="companyLng">
-                </div>
+
                 <button type="submit" class="save-btn">Cadastrar Empresa</button>
             </form>
         </div>
@@ -481,33 +476,6 @@
                     </div>
                     <button type="submit" class="save-btn">Publicar Vaga</button>
                 </form>
-            </div>
-        </div>
-        <div class="dashboard-content">
-            <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <h3 class="feature-title">Cadastro de Empresa</h3>
-                <p class="feature-description">Registre sua empresa e comece a buscar talentos.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <h3 class="feature-title">Busca de Perfis</h3>
-                <p class="feature-description">Encontre candidatos que melhor se adequam às suas vagas.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3 class="feature-title">Avaliação de Habilidades</h3>
-                <p class="feature-description">Ferramenta para avaliar as competências dos candidatos.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3 class="feature-title">Mensagens</h3>
-                <p class="feature-description">Sistema de comunicação direta com candidatos.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📝</div>
-                <h3 class="feature-title">Feedback de Entrevistas</h3>
-                <p class="feature-description">Forneça feedback sobre o desempenho dos candidatos.</p>
             </div>
         </div>
     </div>
@@ -564,38 +532,6 @@
                 </div>
             </div>
             <div id="jobSuggestions"></div>
-        </div>
-        <div class="dashboard-content">
-            <div class="feature-card">
-                <div class="feature-icon">📝</div>
-                <h3 class="feature-title">Cadastro de Candidato</h3>
-                <p class="feature-description">Crie seu perfil profissional e comece sua jornada.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📄</div>
-                <h3 class="feature-title">Criação de Currículo</h3>
-                <p class="feature-description">Ferramenta completa para criar e editar seu currículo.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3 class="feature-title">Sugestão de Vagas</h3>
-                <p class="feature-description">Vagas personalizadas de acordo com seu perfil.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3 class="feature-title">Certificados e Cursos</h3>
-                <p class="feature-description">Acesso a cursos para aprimorar suas habilidades.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">✉️</div>
-                <h3 class="feature-title">Aplicar para Vagas</h3>
-                <p class="feature-description">Candidate-se diretamente às vagas disponíveis.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3 class="feature-title">Mensagens</h3>
-                <p class="feature-description">Comunique-se diretamente com as empresas.</p>
-            </div>
         </div>
     </div>
     
@@ -919,6 +855,44 @@
                 candidateLoginForm.remove();
             }
         });
+        function showCompanyLogin() {
+        mainContent.style.display = 'none';
+        companyRegistration.style.display = 'none';
+        
+        const loginHTML = `
+            <div id="companyLogin" class="dashboard">
+                <h2 class="dashboard-title">Login de Empresa</h2>
+                <div class="form-container">
+                    <form id="companyLoginForm">
+                        <div class="form-group">
+                            <label>CNPJ</label>
+                            <input type="text" class="form-control" id="loginCNPJ" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <button type="submit" class="save-btn">Entrar</button>
+                    </form>
+                </div>
+            </div>`;
+        
+        document.body.insertAdjacentHTML('beforeend', loginHTML);
+        
+        document.getElementById('companyLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const savedCompany = JSON.parse(localStorage.getItem('companyData'));
+            
+            if (savedCompany && 
+                savedCompany.cnpj === document.getElementById('loginCNPJ').value &&
+                savedCompany.email === document.getElementById('loginEmail').value) {
+                document.getElementById('companyLogin').remove();
+                companyDashboard.style.display = 'block';
+            } else {
+                alert('CNPJ ou email incorretos');
+            }
+        });
+    }
     
         function initMap() {
             const map = new google.maps.Map(document.getElementById('map'), {
