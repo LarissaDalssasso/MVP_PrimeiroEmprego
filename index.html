@@ -188,79 +188,9 @@
             gap: 1.5rem;
         }
 
-        .feature-card {
-            padding: 1.5rem;
-            background: var(--light-bg);
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--secondary-color);
-        }
-
-        .feature-title {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-description {
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .form-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-
-        .save-btn {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        .save-btn:hover {
-            background: #2980b9;
+        .job-listings {
+            display: none;
+            margin-top: 2rem;
         }
 
         .job-card {
@@ -290,87 +220,6 @@
             color: var(--primary-color);
         }
 
-        #map {
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        #companyLogin {
-            display: block;
-            max-width: 600px;
-            margin: 4rem auto;
-        }
-
-        #companyLogin .form-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        #candidateRegistration {
-            display: block;
-            max-width: 600px;
-            margin: 4rem auto;
-        }
-
-        #candidateRegistration .form-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        #candidateLogin {
-            display: block;
-            max-width: 600px;
-            margin: 4rem auto;
-        }
-
-        #candidateLogin .form-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            margin-bottom: 2rem;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .faq-item h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        details {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: var(--light-bg);
-            border-radius: 4px;
-        }
-
-        details summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-
-        details p {
-            margin-top: 1rem;
-            line-height: 1.6;
-            color: #666;
-        }
-
         .contact-support {
             margin-top: 3rem;
             background: white;
@@ -391,7 +240,7 @@
 <body>
 
     <nav class="navbar">
-        <a href="https://primeiroemprego.com" class="navbar-brand">Primeiro Emprego</a>
+        <a href="#" class="navbar-brand">Primeiro Emprego</a>
         <div class="nav-links">
             <a href="https://primeiroemprego.com/sobre" class="nav-link">Sobre</a>
             <a href="https://primeiroemprego.com/suporte" class="nav-link">Suporte</a>
@@ -412,12 +261,24 @@
 
             <a href="https://primeiroemprego.com/candidato" class="portal-card">
                 <div class="portal-icon">👤</div>
-                <h2 class="portal-title">Área do Candidato</h2>
+                <h2 class="portal-title">Área do C andidato</h2>
                 <p class="portal-description">Encontre sua primeira oportunidade, desenvolva habilidades e conecte-se
                     com empresas.</p>
                 <button class="btn btn-primary">Acessar como Candidato</button>
             </a>
+            <a href="#" class="portal-card" id="viewJobsCard">
+                <div class="portal-icon">📝</div>
+                <h2 class="portal-title">Vagas Disponíveis</h2>
+                <p class="portal-description">Veja todas as vagas cadastradas e encontre a oportunidade ideal para você.
+                </p>
+                <button class="btn btn-primary">Ver Vagas</button>
+            </a>
         </div>
+    </div>
+
+    <div id="jobListings" class="job-listings">
+        <h2 class="dashboard-title">Vagas Disponíveis</h2>
+        <div class="dashboard-content" id="jobSuggestions"></div>
     </div>
 
     <div id="companyRegistration" class="dashboard">
@@ -503,13 +364,14 @@
                     <button type="submit" class="save-btn">Salvar Currículo</button>
                 </form>
             </div>
+            ```html
         </div>
         <div class="dashboard-section">
             <h3>Certificados e Cursos</h3>
             <div class="form-container">
                 <form id="certificateForm">
                     <div class="form-group">
-                        <label>Nome do Certificado/Curso</label>
+                        <label>Nome do Certificado/ Curso</label>
                         <input type="text" class="form-control" id="certName">
                     </div>
                     <div class="form-group">
@@ -586,7 +448,7 @@
                 </div>
                 <div class="process-step"
                     style="flex: 1; text-align: center; padding: 1rem; background: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">2️⃣</div>
+                    <div style="font-size: 2rem ; margin-bottom: 1rem;">2️⃣</div>
                     <h4>Match</h4>
                     <p>Sistema conecta perfis compatíveis</p>
                 </div>
@@ -683,7 +545,7 @@
                             <select class="form-control" required>
                                 <option value="">Selecione um assunto</option>
                                 <option value="technical">Problema Técnico</option>
-                                <option value="account">Conta/Acesso</option>
+                                <option value="account_access">Conta/Acesso</option>
                                 <option value="other">Outros</option>
                             </select>
                         </div>
@@ -707,10 +569,8 @@
             const aboutContent = document.getElementById('aboutContent');
             const companyRegistration = document.getElementById('companyRegistration');
             const supportContent = document.getElementById('supportContent');
-
+            const jobListingsContainer = document.getElementById('jobListings');
             let jobListings = JSON.parse(localStorage.getItem('jobListings')) || [];
-            let certificates = JSON.parse(localStorage.getItem('certificates')) || [];
-            let courses = JSON.parse(localStorage.getItem('courses')) || [];
 
             function showCompanyChoiceDialog() {
                 const choice = confirm("Você já possui cadastro?\n\nOK = Sim, fazer login\nCancelar = Não, fazer cadastro");
@@ -719,13 +579,11 @@
                 } else {
                     companyRegistration.style.display = 'block';
                     companyDashboard.style.display = 'none';
-                    initMap();
                 }
             }
 
             function showCandidateRegistration() {
                 mainContent.style.display = 'none';
-
                 const registrationHTML = `
                 <div id="candidateRegistration" class="dashboard">
                     <h2 class="dashboard-title">Cadastro de Candidato</h2>
@@ -783,7 +641,6 @@
 
             function showCandidateLogin() {
                 mainContent.style.display = 'none';
-
                 const loginHTML = `
                 <div id="candidateLogin" class="dashboard">
                     <h2 class="dashboard-title">Login de Candidato</h2>
@@ -791,7 +648,7 @@
                         <form id="candidateLoginForm">
                             <div class="form-group">
                                 <label>CPF</label>
-                                <input type="text" class="form-control" id="loginCandidateCPF" required>
+                                <input type="text" class="form-control" id="loginCandidateCPF" required >
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
@@ -837,192 +694,44 @@
                         }
                         companyDashboard.style.display = 'none';
                         companyRegistration.style.display = 'none';
+                    } else if (this.id === 'viewJobsCard') {
+                        showJobListings();
                     }
                 });
             });
 
-            document.querySelector('a[href*="sobre"]').addEventListener('click', function (e) {
-                e.preventDefault();
+            function showJobListings() {
                 mainContent.style.display = 'none';
-                companyDashboard.style.display = 'none';
-                candidateDashboard.style.display = 'none';
-                aboutContent.style.display = 'block';
-            });
-
-            document.querySelector('a[href*="suporte"]').addEventListener('click', function (e) {
-                e.preventDefault();
-                mainContent.style.display = 'none';
-                companyDashboard.style.display = 'none';
-                candidateDashboard.style.display = 'none';
-                aboutContent.style.display = 'none';
-                supportContent.style.display = 'block';
-            });
-
-            document.querySelector('.navbar-brand').addEventListener('click', function (e) {
-                e.preventDefault();
-                mainContent.style.display = 'block';
                 companyDashboard.style.display = 'none';
                 candidateDashboard.style.display = 'none';
                 aboutContent.style.display = 'none';
                 supportContent.style.display = 'none';
-                companyRegistration.style.display = 'none';
+                jobListingsContainer.style.display = 'block';
 
-                const loginForm = document.getElementById('companyLogin');
-                if (loginForm) {
-                    loginForm.remove();
-                }
+                // Obtenha as vagas do localStorage
+                const jobListings = JSON.parse(localStorage.getItem('jobListings')) || [];
+                const jobSuggestionsDiv = document.getElementById('jobSuggestions');
 
-                const candidateLoginForm = document.getElementById('candidateLogin');
-                if (candidateLoginForm) {
-                    candidateLoginForm.remove();
-                }
-            });
-            function showCompanyLogin() {
-                mainContent.style.display = 'none';
-                companyRegistration.style.display = 'none';
-
-                const loginHTML = `<div id="companyLogin" class="dashboard">
-                <h2 class="dashboard-title">Login de Empresa</h2>
-                <div class="form-container">
-                    <form id="companyLoginForm">
-                        <div class="form-group">
-                            <label>CNPJ</label>
-                            <input type="text" class="form-control" id="loginCNPJ" required>
+                if (jobListings.length === 0) {
+                    jobSuggestionsDiv.innerHTML = '<p>Nenhuma vaga disponível no momento.</p>';
+                } else {
+                    jobSuggestionsDiv.innerHTML = jobListings.map(job => `
+                        <div class="job-card">
+                            <h3>${job.title}</h3>
+                            <p><strong>Empresa:</strong> ${job.company}</p>
+                            <p><strong>Setor:</strong> ${job.sector}</p>
+                            <p><strong>Descrição:</strong> ${job.description}</p>
+                            <p><strong>Habilidades:</strong> ${job.skills.join(', ')}</p>
+                            <button onclick="applyToJob('${job.id}')" class="btn btn-primary">Aplicar</button>
                         </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" id="loginEmail" required>
-                        </div>
-                        <button type="submit" class="save-btn">Entrar</button>
-                    </form>
-                </div>
-            </div>`;
-
-                document.body.insertAdjacentHTML('beforeend', loginHTML);
-
-                document.getElementById('companyLoginForm').addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const savedCompany = JSON.parse(localStorage.getItem('companyData'));
-
-                    if (savedCompany &&
-                        savedCompany.cnpj === document.getElementById('loginCNPJ').value &&
-                        savedCompany.email === document.getElementById('loginEmail').value) {
-                        document.getElementById('companyLogin').remove();
-                        companyDashboard.style.display = 'block';
-                    } else {
-                        alert('CNPJ ou email incorretos');
-                    }
-                });
-            }
-
-            function initMap() {
-                const map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -23.550520, lng: -46.633308 },
-                    zoom: 12
-                });
-
-                let marker;
-
-                map.addListener('click', (e) => {
-                    if (marker) {
-                        marker.setMap(null);
-                    }
-                    marker = new google.maps.Marker({
-                        position: e.latLng,
-                        map: map
-                    });
-
-                    document.getElementById('companyLat').value = e.latLng.lat();
-                    document.getElementById('companyLng').value = e.latLng.lng();
-                });
-            }
-
-            document.getElementById('companyRegistrationForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const companyData = {
-                    name: document.getElementById('companyName').value,
-                    cnpj: document.getElementById('companyCNPJ').value,
-                    email: document.getElementById('companyEmail').value,
-                    phone: document.getElementById('companyPhone').value,
-                    address: document.getElementById('companyAddress').value,
-                  
-                };
-
-                localStorage.setItem('companyData', JSON.stringify(companyData));
-                alert('Empresa cadastrada com sucesso!');
-
-                companyRegistration.style.display = 'none';
-                companyDashboard.style.display = 'block';
-            });
-
-            document.getElementById('jobForm')?.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const companyData = JSON.parse(localStorage.getItem('companyData')) || {};
-
-                const jobData = {
-                    id: Date.now().toString(),
-                    title: document.getElementById('jobTitle').value,
-                    description: document.getElementById('jobDescription').value,
-                    sector: document.getElementById('jobSector').value,
-                    skills: document.getElementById('jobSkills').value.split(',').map(s => s.trim()),
-                    company: companyData.name || 'Empresa não especificada'
-                };
-
-                addJobListing(jobData);
-                alert('Vaga publicada com sucesso!');
-                this.reset();
-            });
-
-            function addJobListing(jobData) {
-                jobListings.push(jobData);
-                localStorage.setItem('jobListings', JSON.stringify(jobListings));
-                updateJobSuggestions();
-            }
-
-            document.getElementById('sectorFilter')?.addEventListener('change', function () {
-                updateJobSuggestions();
-            });
-
-            function updateJobSuggestions() {
-                const selectedSector = document.getElementById('sectorFilter').value;
-                let matchedJobs = jobListings;
-
-                if (selectedSector) {
-                    matchedJobs = matchedJobs.filter(job => job.sector.toLowerCase() === selectedSector.toLowerCase());
+                    `).join('');
                 }
-
-                displayJobSuggestions(matchedJobs);
             }
 
-            function displayJobSuggestions(jobs) {
-                const suggestionsContainer = document.getElementById('jobSuggestions');
-                if (!suggestionsContainer) return;
-
-                if (jobs.length === 0) {
-                    suggestionsContainer.innerHTML = '<p>Nenhuma vaga encontrada para os filtros selecionados.</p>';
-                    return;
-                }
-
-                suggestionsContainer.innerHTML = jobs.map(job => `
-                <div class="job-card">
-                    <h3>${job.title}</h3>
-                    <p><strong>Empresa:</strong> ${job.company}</p>
-                    <p><strong>Setor:</strong> ${job.sector}</p>
-                    <p><strong>Descrição:</strong> ${job.description}</p>
-                    <p><strong>Habilidades:</strong> ${job.skills.join(', ')}</p>
-                    <button onclick="applyToJob('${job.id}')" class="btn btn-primary">Aplicar</button>
-                </div>
-            `).join('');
-            }
-
-            function applyToJob(id) {
-                alert(`Candidatura enviada para vaga com ID: ${id}`);
-            }
-
-            document.getElementById('supportForm')?.addEventListener('submit', function (e) {
+            // Adicionar o evento de clique no card de Vagas Disponíveis
+            document.getElementById('viewJobsCard').addEventListener('click', function (e) {
                 e.preventDefault();
-                alert('Mensagem enviada com sucesso! Nossa equipe responderá em até 24 horas.');
-                this.reset();
+                showJobListings();
             });
         });
     </script>
