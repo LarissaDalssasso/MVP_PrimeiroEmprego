@@ -1,286 +1,409 @@
-<html>
-
-<head>
-    <base href="." />
+<html><head><base href="." />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PrimeiroEmprego</title>
-
+    
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3e;
-            --light-bg: #ecf0f1;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-        }
-
-        .navbar {
-            background-color: var(--primary-color);
-            padding: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-brand {
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-brand:hover {
-            color: var(--secondary-color);
-        }
-
-        .navbar-brand:before {
-            content: "🏠";
-            font-size: 1.2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--secondary-color);
-        }
-
-        .tab-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 4rem auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-title {
-            color: white;
-            margin-bottom: 2rem;
-            font-size: 3.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-weight: 800;
-            letter-spacing: 1px;
-            background: rgba(44, 62, 80, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-
-        .portal-options {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-        }
-
-        .portal-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 2rem;
-            width: 300px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            backdrop-filter: blur(5px);
-        }
-
-        .portal-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .portal-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--secondary-color);
-        }
-
-        .portal-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .portal-description {
-            color: #666;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #2980b9;
-        }
-
-        .dashboard {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            backdrop-filter: blur(5px);
-            display: none;
-        }
-
-        .dashboard-section {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .dashboard-title {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-
-        .dashboard-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .job-listings {
-            display: none;
-            margin-top: 2rem;
-        }
-
-        .job-card {
-            background: var(--light-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .job-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .job-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .job-card p {
-            margin-bottom: 0.5rem;
-        }
-
-        .job-card strong {
-            color: var(--primary-color);
-        }
-
-        .contact-support {
-            margin-top: 3rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-support h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+    :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --accent-color: #e74c3e;
+        --light-bg: #ecf0f1;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+        background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+    }
+    
+    .navbar {
+        background-color: var(--primary-color);
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .navbar-brand {
+        color: white;
+        font-size: 1.5rem;
+        text-decoration: none;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.3s ease;
+    }
+    
+    .navbar-brand:hover {
+        color: var(--secondary-color);
+    }
+    
+    .navbar-brand:before {
+        content: "🏠";
+        font-size: 1.2rem;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .nav-link {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+        color: var(--secondary-color);
+    }
+    
+    .tab-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 4rem auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .welcome-title {
+        color: white;
+        margin-bottom: 2rem;
+        font-size: 3.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        font-weight: 800;
+        letter-spacing: 1px;
+        background: rgba(44, 62, 80, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+    
+    .portal-options {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: nowrap;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .portal-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 2rem;
+        width: calc(33.33% - 2rem);
+        min-width: 250px;
+        flex: 1;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        backdrop-filter: blur(5px);
+    }
+    
+    .portal-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .portal-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+    }
+    
+    .portal-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+    
+    .portal-description {
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn-primary {
+        background-color: var(--secondary-color);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background-color: #2980b9;
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+    }
+    
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+    
+    .dashboard {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        backdrop-filter: blur(5px);
+        display: none;
+    }
+    
+    .dashboard-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .dashboard-title {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .form-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+    
+    .form-group {
+        text-align: left;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+    
+    .form-group h4 {
+        color: var(--primary-color);
+        margin: 1.5rem 0 1rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+    
+    .save-btn {
+        display: block;
+        width: 100%;
+        margin-top: 1rem;
+        background: var(--secondary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    
+    .save-btn:hover {
+        background: #2980b9;
+    }
+    
+    .job-card {
+        background: var(--light-bg);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .job-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .job-card h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+    }
+    
+    .job-card p {
+        margin-bottom: 0.5rem;
+    }
+    
+    .job-card strong {
+        color: var(--primary-color);
+    }
+    
+    #companyLogin, #candidateLogin {
+        display: block;
+        max-width: 600px;
+        margin: 4rem auto;
+        padding: 0 20px;
+    }
+    
+    #companyLogin .form-container, 
+    #candidateLogin .form-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    #candidateRegistration {
+        display: block;
+        max-width: 600px;
+        margin: 4rem auto;
+    }
+    
+    #candidateRegistration .form-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .faq-item {
+        margin-bottom: 2rem;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .faq-item h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+    
+    details {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: var(--light-bg);
+        border-radius: 4px;
+    }
+    
+    details summary {
+        cursor: pointer;
+        font-weight: bold;
+        color: var(--secondary-color);
+    }
+    
+    details p {
+        margin-top: 1rem;
+        line-height: 1.6;
+        color: #666;
+    }
+    
+    .contact-support {
+        margin-top: 3rem;
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .contact-support h3 {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .education-entry, .experience-entry, .language-entry {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: #f8f9fa;
+    }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
-</head>
-
-<body>
-
+    </head>
+    <body>
+    
     <nav class="navbar">
-        <a href="#" class="navbar-brand">Primeiro Emprego</a>
+        <a href="https://primeiroemprego.com" class="navbar-brand">PrimeiroEmprego</a>
         <div class="nav-links">
             <a href="https://primeiroemprego.com/sobre" class="nav-link">Sobre</a>
             <a href="https://primeiroemprego.com/suporte" class="nav-link">Suporte</a>
         </div>
     </nav>
-
+    
     <div class="tab-container" id="mainContent">
         <h1 class="welcome-title">Bem-vindo ao PrimeiroEmprego</h1>
-
+        
         <div class="portal-options">
             <a href="https://primeiroemprego.com/empresa" class="portal-card">
                 <div class="portal-icon">🏢</div>
                 <h2 class="portal-title">Área da Empresa</h2>
-                <p class="portal-description">Publique vagas, gerencie candidaturas e encontre os melhores talentos para
-                    sua empresa.</p>
+                <p class="portal-description">Publique vagas, gerencie candidaturas e encontre os melhores talentos para sua empresa.</p>
                 <button class="btn btn-primary">Acessar como Empresa</button>
             </a>
-
+            
             <a href="https://primeiroemprego.com/candidato" class="portal-card">
                 <div class="portal-icon">👤</div>
-                <h2 class="portal-title">Área do C andidato</h2>
-                <p class="portal-description">Encontre sua primeira oportunidade, desenvolva habilidades e conecte-se
-                    com empresas.</p>
+                <h2 class="portal-title">Área do Candidato</h2>
+                <p class="portal-description">Encontre sua primeira oportunidade, desenvolva habilidades e conecte-se com empresas.</p>
                 <button class="btn btn-primary">Acessar como Candidato</button>
             </a>
-            <a href="#" class="portal-card" id="viewJobsCard">
-                <div class="portal-icon">📝</div>
+    
+            <a href="https://primeiroemprego.com/vagas" class="portal-card">
+                <div class="portal-icon">📋</div>
                 <h2 class="portal-title">Vagas Disponíveis</h2>
-                <p class="portal-description">Veja todas as vagas cadastradas e encontre a oportunidade ideal para você.
-                </p>
+                <p class="portal-description">Explore todas as oportunidades de emprego disponíveis em nossa plataforma.</p>
                 <button class="btn btn-primary">Ver Vagas</button>
             </a>
         </div>
     </div>
-
-    <div id="jobListings" class="job-listings">
-        <h2 class="dashboard-title">Vagas Disponíveis</h2>
-        <div class="dashboard-content" id="jobSuggestions"></div>
-    </div>
-
+    
     <div id="companyRegistration" class="dashboard">
         <h2 class="dashboard-title">Cadastro de Empresa</h2>
         <div class="form-container">
@@ -305,12 +428,15 @@
                     <label>Endereço</label>
                     <input type="text" class="form-control" id="companyAddress" required>
                 </div>
-
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" class="form-control" id="companyPassword" required>
+                </div>
                 <button type="submit" class="save-btn">Cadastrar Empresa</button>
             </form>
         </div>
     </div>
-
+    
     <div id="companyDashboard" class="dashboard">
         <h2 class="dashboard-title">Área da Empresa</h2>
         <div class="dashboard-section">
@@ -346,193 +472,136 @@
             </div>
         </div>
     </div>
-
+    
     <div id="candidateDashboard" class="dashboard">
         <h2 class="dashboard-title">Área do Candidato</h2>
         <div class="dashboard-section">
             <h3>Currículo</h3>
             <div class="form-container">
                 <form id="resumeForm">
+                    <!-- Dados Pessoais -->
                     <div class="form-group">
-                        <label>Experiência Profissional</label>
-                        <textarea class="form-control" id="experience" rows="4"></textarea>
+                        <h4>Dados Pessoais</h4>
+                        <label>Nome Completo</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                        
+                        <label>Endereço</label>
+                        <input type="text" class="form-control" id="address" required>
+                        
+                        <label>Telefone</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                        
+                        <label>E-mail</label>
+                        <input type="email" class="form-control" id="email" required>
+                        
+                        <label>LinkedIn</label>
+                        <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/seu-perfil">
                     </div>
+    
+                    <!-- Objetivo -->
                     <div class="form-group">
-                        <label>Habilidades</label>
-                        <input type="text" class="form-control" id="skills">
+                        <h4>Objetivo</h4>
+                        <textarea class="form-control" id="objective" rows="2" placeholder="Descreva brevemente seu objetivo profissional"></textarea>
                     </div>
+    
+                    <!-- Formação Acadêmica -->
+                    <div class="form-group">
+                        <h4>Formação Acadêmica (Opcional)</h4>
+                        <div id="educationFields">
+                            <!-- Empty by default -->
+                        </div>
+                        <p class="helper-text" style="color: #666; margin-bottom: 1rem;">Se você não possui formação acadêmica, deixe esta seção em branco.</p>
+                        <button type="button" class="btn btn-secondary" onclick="addEducationField()">+ Adicionar Formação</button>
+                    </div>
+    
+                    <!-- Experiência Profissional -->
+                    <div class="form-group">
+                        <h4>Experiência Profissional (Opcional)</h4>
+                        <div id="experienceFields">
+                            <!-- Empty by default -->
+                        </div>
+                        <p class="helper-text" style="color: #666; margin-bottom: 1rem;">Se você não possui experiência profissional, deixe esta seção em branco.</p>
+                        <button type="button" class="btn btn-secondary" onclick="addExperienceField()">+ Adicionar Experiência</button>
+                    </div>
+    
+                    <!-- Habilidades -->
+                    <div class="form-group">
+                        <h4>Habilidades (Soft Skills)</h4>
+                        <textarea class="form-control" id="skills" rows="3" placeholder="Ex: Liderança, Trabalho em equipe, Comunicação..."></textarea>
+                    </div>
+    
+                    <!-- Idiomas -->
+                    <div class="form-group">
+                        <h4>Idiomas (Opcional)</h4>
+                        <div id="languageFields">
+                            <!-- Empty by default -->
+                        </div>
+                        <p class="helper-text" style="color: #666; margin-bottom: 1rem;">Se você não possui conhecimento em outros idiomas, deixe esta seção em branco.</p>
+                        <button type="button" class="btn btn-secondary" onclick="addLanguageField()">+ Adicionar Idioma</button>
+                    </div>
+    
+                    <!-- Outras Informações -->
+                    <div class="form-group">
+                        <h4>Outras Informações</h4>
+                        <textarea class="form-control" id="otherInfo" rows="4" placeholder="Intercâmbios, atividades de extensão, iniciação científica, trabalho voluntário..."></textarea>
+                    </div>
+    
                     <button type="submit" class="save-btn">Salvar Currículo</button>
                 </form>
             </div>
-            ```html
-        </div>
-        <div class="dashboard-section">
-            <h3>Certificados e Cursos</h3>
-            <div class="form-container">
-                <form id="certificateForm">
-                    <div class="form-group">
-                        <label>Nome do Certificado/ Curso</label>
-                        <input type="text" class="form-control" id="certName">
-                    </div>
-                    <div class="form-group">
-                        <label>Arquivo do Certificado</label>
-                        <input type="file" class="form-control" id="certFile" accept=".pdf,.jpg,.png">
-                    </div>
-                    <button type="submit" class="save-btn">Adicionar Certificado</button>
-                </form>
-            </div>
-            <div id="certificateList"></div>
-        </div>
-        <div class="dashboard-section">
-            <h3>Vagas Sugeridas</h3>
-            <div class="form-container">
-                <div class="form-group">
-                    <label>Filtrar por Setor:</label>
-                    <select class="form-control" id="sectorFilter">
-                        <option value="">Todos os Setores</option>
-                        <option value="tecnologia">Tecnologia</option>
-                        <option value="administracao">Administração</option>
-                        <option value="financeiro">Financeiro</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="vendas">Vendas</option>
-                        <option value="rh">Recursos Humanos</option>
-                    </select>
-                </div>
-            </div>
-            <div id="jobSuggestions"></div>
         </div>
     </div>
-
+    
     <div id="aboutContent" class="dashboard" style="display: none;">
         <h2 class="dashboard-title">Sobre Nós</h2>
         <div class="dashboard-section">
             <p style="font-size: 1.2rem; line-height: 1.6; color: #333;">
-                A startup tem como objetivo conectar empresas com jovens talentos que buscam o primeiro emprego,
-                oferecendo suporte no desenvolvimento de currículos, habilidades e facilitando o acesso a oportunidades
-                de estágio remunerado. Nosso foco é criar uma plataforma que simplifica esse processo para ambos os
-                lados, promovendo o desenvolvimento de carreira e melhorando a qualidade da contratação para as
-                empresas.
+                A startup tem como objetivo conectar empresas com jovens talentos que buscam o primeiro emprego, oferecendo suporte no desenvolvimento de currículos, habilidades e facilitando o acesso a oportunidades de estágio remunerado. Nosso foco é criar uma plataforma que simplifica esse processo para ambos os lados, promovendo o desenvolvimento de carreira e melhorando a qualidade da contratação para as empresas.
             </p>
         </div>
-
-        <div class="dashboard-section">
-            <h3 class="feature-title">Nossa Missão</h3>
-            <div class="dashboard-content">
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="feature-title">Conexão</h3>
-                    <p class="feature-description">Unir empresas e jovens talentos de forma eficiente e direcionada.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3 class="feature-title">Desenvolvimento</h3>
-                    <p class="feature-description">Apoiar o crescimento profissional através de ferramentas e recursos.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h3 class="feature-title">Oportunidades</h3>
-                    <p class="feature-description">Facilitar o acesso ao primeiro emprego e estágios remunerados.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="dashboard-section">
-            <h3 class="feature-title">Como Funcionamos</h3>
-            <div style="display: flex; gap: 2rem; margin-top: 2rem;">
-                <div class="process-step"
-                    style="flex: 1; text-align: center; padding: 1rem; background: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">1️⃣</div>
-                    <h4>Cadastro</h4>
-                    <p>Empresas e candidatos criam seus perfis</p>
-                </div>
-                <div class="process-step"
-                    style="flex: 1; text-align: center; padding: 1rem; background: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <div style="font-size: 2rem ; margin-bottom: 1rem;">2️⃣</div>
-                    <h4>Match</h4>
-                    <p>Sistema conecta perfis compatíveis</p>
-                </div>
-                <div class="process-step"
-                    style="flex: 1; text-align: center; padding: 1rem; background: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">3️⃣</div>
-                    <h4>Contratação</h4>
-                    <p>Processo simplificado e direto</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="dashboard-section">
-            <h3 class="feature-title">Impacto Social</h3>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem;">
-                <div class="impact-card"
-                    style="background: var(--light-bg); padding: 2rem; border-radius: 8px; text-align: center;">
-                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">Para Jovens</h4>
-                    <ul style="list-style: none; text-align: left;">
-                        <li>✓ Acesso a oportunidades de qualidade</li>
-                        <li>✓ Desenvolvimento profissional</li>
-                        <li>✓ Mentoria e orientação</li>
-                    </ul>
-                </div>
-                <div class="impact-card"
-                    style="background: var(--light-bg); padding: 2rem; border-radius: 8px; text-align: center;">
-                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">Para Empresas</h4>
-                    <ul style="list-style: none; text-align: left;">
-                        <li>✓ Talentos qualificados</li>
-                        <li>✓ Processo seletivo otimizado</li>
-                        <li>✓ Diversidade e inovação</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
-
+    
     <div id="supportContent" class="dashboard" style="display: none;">
         <h2 class="dashboard-title">Suporte Técnico</h2>
-
+        
         <div class="dashboard-section">
             <div class="faq-container">
                 <div class="faq-item">
                     <h3>Problemas com Login</h3>
                     <details>
                         <summary>Esqueci minha senha, como recuperar?</summary>
-                        <p>Para recuperar sua senha, clique em "Esqueci minha senha" na tela de login e siga as
-                            instruções enviadas ao seu email cadastrado.</p>
+                        <p>Para recuperar sua senha, clique em "Esqueci minha senha" na tela de login e siga as instruções enviadas ao seu email cadastrado.</p>
                     </details>
                     <details>
                         <summary>Não consigo acessar minha conta</summary>
-                        <p>Verifique se está usando o email/CNPJ correto e se sua conexão com a internet está estável.
-                            Caso o problema persista, entre em contato com nossa equipe.</p>
+                        <p>Verifique se está usando o email/CNPJ correto e se sua conexão com a internet está estável. Caso o problema persista, entre em contato com nossa equipe.</p>
                     </details>
                 </div>
-
+    
                 <div class="faq-item">
                     <h3>Cadastro e Perfil</h3>
                     <details>
                         <summary>Como atualizar meus dados cadastrais?</summary>
-                        <p>Acesse seu perfil através do painel principal e clique em "Editar Informações" para atualizar
-                            seus dados.</p>
+                        <p>Acesse seu perfil através do painel principal e clique em "Editar Informações" para atualizar seus dados.</p>
                     </details>
                     <details>
                         <summary>Não consigo anexar documentos</summary>
-                        <p>Certifique-se que o arquivo está nos formatos permitidos (PDF, JPG, PNG) e não ultrapassa
-                            5MB.</p>
+                        <p>Certifique-se que o arquivo está nos formatos permitidos (PDF, JPG, PNG) e não ultrapassa 5MB.</p>
                     </details>
                 </div>
-
+    
                 <div class="faq-item">
                     <h3>Vagas e Candidaturas</h3>
                     <details>
                         <summary>Como publico uma nova vaga?</summary>
-                        <p>No painel da empresa, acesse "Cadastrar Nova Vaga" e preencha todas as informações
-                            solicitadas.</p>
+                        <p>No painel da empresa, acesse "Cadastrar Nova Vaga" e preencha todas as informações solicitadas.</p>
                     </details>
                     <details>
                         <summary>Como acompanho minhas candidaturas?</summary>
-                        <p>No painel do candidato, acesse a seção "Minhas Candidaturas" para ver o status de cada
-                            aplicação.</p>
+                        <p>No painel do candidato, acesse a seção "Minhas Candidaturas" para ver o status de cada aplicação.</p>
                     </details>
                 </div>
-
+    
                 <div class="contact-support">
                     <h3>Ainda precisa de ajuda?</h3>
                     <form id="supportForm">
@@ -545,7 +614,7 @@
                             <select class="form-control" required>
                                 <option value="">Selecione um assunto</option>
                                 <option value="technical">Problema Técnico</option>
-                                <option value="account_access">Conta/Acesso</option>
+                                <option value="account">Conta/Acesso</option>
                                 <option value="other">Outros</option>
                             </select>
                         </div>
@@ -559,35 +628,272 @@
             </div>
         </div>
     </div>
-
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const portalCards = document.querySelectorAll('.portal-card');
-            const mainContent = document.getElementById('mainContent');
-            const companyDashboard = document.getElementById('companyDashboard');
-            const candidateDashboard = document.getElementById('candidateDashboard');
-            const aboutContent = document.getElementById('aboutContent');
-            const companyRegistration = document.getElementById('companyRegistration');
-            const supportContent = document.getElementById('supportContent');
-            const jobListingsContainer = document.getElementById('jobListings');
-            let jobListings = JSON.parse(localStorage.getItem('jobListings')) || [];
-
-            function showCompanyChoiceDialog() {
-                const choice = confirm("Você já possui cadastro?\n\nOK = Sim, fazer login\nCancelar = Não, fazer cadastro");
-                if (choice) {
-                    showCompanyLogin();
-                } else {
-                    companyRegistration.style.display = 'block';
-                    companyDashboard.style.display = 'none';
-                }
+    function addEducationField() {
+        const educationFields = document.getElementById('educationFields');
+        const template = `
+            <div class="education-entry">
+                <label>Instituição</label>
+                <input type="text" class="form-control" name="institution">
+                
+                <label>Curso</label>
+                <input type="text" class="form-control" name="course">
+                
+                <label>Data de Início</label>
+                <input type="date" class="form-control" name="startDate">
+                
+                <label>Data de Conclusão</label>
+                <input type="date" class="form-control" name="endDate">
+                
+                <label>Status</label>
+                <select class="form-control" name="status">
+                    <option value="concluido">Concluído</option>
+                    <option value="em_andamento">Em Andamento</option>
+                    <option value="trancado">Trancado</option>
+                </select>
+                <button type="button" class="btn btn-secondary" onclick="this.parentElement.remove()">Remover</button>
+            </div>
+        `;
+        educationFields.insertAdjacentHTML('beforeend', template);
+    }
+    
+    function addExperienceField() {
+        const template = `
+            <div class="experience-entry">
+                <label>Empresa</label>
+                <input type="text" class="form-control" name="company">
+                
+                <label>Cargo</label>
+                <input type="text" class="form-control" name="position">
+                
+                <label>Atribuições</label>
+                <textarea class="form-control" name="responsibilities" rows="3"></textarea>
+                
+                <label>Data de Início</label>
+                <input type="date" class="form-control" name="jobStartDate">
+                
+                <label>Data de Término</label>
+                <input type="date" class="form-control" name="jobEndDate">
+                <button type="button" class="btn btn-secondary" onclick="this.parentElement.remove()">Remover</button>
+            </div>
+        `;
+        document.getElementById('experienceFields').insertAdjacentHTML('beforeend', template);
+    }
+    
+    function addLanguageField() {
+        const template = `
+            <div class="language-entry">
+                <label>Idioma</label>
+                <input type="text" class="form-control" name="language">
+                
+                <label>Nível</label>
+                <select class="form-control" name="proficiency">
+                    <option value="basico">Básico</option>
+                    <option value="intermediario">Intermediário</option>
+                    <option value="avancado">Avançado</option>
+                    <option value="fluente">Fluente</option>
+                </select>
+                <button type="button" class="btn btn-secondary" onclick="this.parentElement.remove()">Remover</button>
+            </div>
+        `;
+        document.getElementById('languageFields').insertAdjacentHTML('beforeend', template);
+    }
+    
+    function hideAllDashboards() {
+        const dashboards = document.querySelectorAll('.dashboard');
+        dashboards.forEach(dashboard => {
+            if (dashboard) {
+                dashboard.style.display = 'none';
             }
-
-            function showCandidateRegistration() {
-                mainContent.style.display = 'none';
-                const registrationHTML = `
-                <div id="candidateRegistration" class="dashboard">
-                    <h2 class="dashboard-title">Cadastro de Candidato</h2>
+        });
+        
+        const mainContent = document.getElementById('mainContent');
+        if (mainContent) {
+            mainContent.style.display = 'none';
+        }
+        
+        const companyLoginForm = document.getElementById('companyLogin');
+        if (companyLoginForm) {
+            companyLoginForm.remove();
+        }
+        
+        const candidateLoginForm = document.getElementById('candidateLogin');
+        if (candidateLoginForm) {
+            candidateLoginForm.remove();
+        }
+        
+        const candidateRegistrationForm = document.getElementById('candidateRegistration');
+        if (candidateRegistrationForm) {
+            candidateRegistrationForm.remove();
+        }
+        
+        const dynamicJobDashboard = document.querySelector('.dashboard:not([id])');
+        if (dynamicJobDashboard) {
+            dynamicJobDashboard.remove();
+        }
+    }
+    
+    document.getElementById('resumeForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const linkedinValue = document.getElementById('linkedin').value;
+        
+        const resumeData = {
+            personalInfo: {
+                fullName: document.getElementById('fullName').value,
+                address: document.getElementById('address').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                linkedin: linkedinValue || '' // Make LinkedIn optional
+            },
+            objective: document.getElementById('objective').value,
+            education: Array.from(document.querySelectorAll('.education-entry')).length > 0 ? 
+                Array.from(document.querySelectorAll('.education-entry')).map(entry => ({
+                    institution: entry.querySelector('[name="institution"]').value,
+                    course: entry.querySelector('[name="course"]').value,
+                    startDate: entry.querySelector('[name="startDate"]').value,
+                    endDate: entry.querySelector('[name="endDate"]').value,
+                    status: entry.querySelector('[name="status"]').value
+                })) : [],
+            experience: Array.from(document.querySelectorAll('.experience-entry')).length > 0 ?
+                Array.from(document.querySelectorAll('.experience-entry')).map(entry => ({
+                    company: entry.querySelector('[name="company"]').value,
+                    position: entry.querySelector('[name="position"]').value,
+                    responsibilities: entry.querySelector('[name="responsibilities"]').value,
+                    startDate: entry.querySelector('[name="jobStartDate"]').value,
+                    endDate: entry.querySelector('[name="jobEndDate"]').value
+                })) : [],
+            skills: document.getElementById('skills').value,
+            languages: Array.from(document.querySelectorAll('.language-entry')).length > 0 ?
+                Array.from(document.querySelectorAll('.language-entry')).map(entry => ({
+                    language: entry.querySelector('[name="language"]').value,
+                    proficiency: entry.querySelector('[name="proficiency"]').value
+                })) : [],
+            otherInfo: document.getElementById('otherInfo').value
+        };
+        
+        localStorage.setItem('candidateResume', JSON.stringify(resumeData));
+        alert('Currículo salvo com sucesso!');
+    });
+    
+    function applyToJob(jobId) {
+        const savedCandidate = JSON.parse(localStorage.getItem('candidateData'));
+        
+        if (!savedCandidate) {
+            alert('Por favor, faça login ou cadastre-se para se candidatar às vagas.');
+            return;
+        }
+    
+        const applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+        const alreadyApplied = applications.some(app => app.jobId === jobId && app.candidateId === savedCandidate.cpf);
+        
+        if (alreadyApplied) {
+            alert('Você já se candidatou para esta vaga!');
+            return;
+        }
+        
+        const application = {
+            jobId: jobId,
+            candidateId: savedCandidate.cpf,
+            date: new Date().toISOString()
+        };
+        
+        applications.push(application);
+        localStorage.setItem('jobApplications', JSON.stringify(applications));
+        alert('Candidatura realizada com sucesso!');
+    }
+    
+    function showCompanyChoiceDialog() {
+        const choice = confirm("Você já possui cadastro?\nOK - Fazer Login\nCancelar - Criar nova conta");
+        
+        if (choice) {
+            // Show login form
+            const loginForm = `
+                <div id="companyLogin">
                     <div class="form-container">
+                        <h2 class="dashboard-title">Login da Empresa</h2>
+                        <form id="companyLoginForm">
+                            <div class="form-group">
+                                <label>CNPJ</label>
+                                <input type="text" class="form-control" id="loginCNPJ" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Senha</label>
+                                <input type="password" class="form-control" id="loginCompanyPassword" required>
+                            </div>
+                            <button type="submit" class="save-btn">Entrar</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', loginForm);
+            
+            document.getElementById('companyLoginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const savedCompany = JSON.parse(localStorage.getItem('companyData'));
+                
+                if (savedCompany && 
+                    savedCompany.cnpj === document.getElementById('loginCNPJ').value && 
+                    savedCompany.password === document.getElementById('loginCompanyPassword').value) {
+                    alert('Login realizado com sucesso!');
+                    document.getElementById('companyLogin').remove();
+                    document.getElementById('companyDashboard').style.display = 'block';
+                } else {
+                    alert('CNPJ ou senha incorretos!');
+                }
+            });
+        } else {
+            // Show registration form
+            document.getElementById('companyRegistration').style.display = 'block';
+        }
+    }
+    
+    function showCandidateChoiceDialog() {
+        const choice = confirm("Você já possui cadastro?\nOK - Fazer Login\nCancelar - Criar nova conta");
+        
+        if (choice) {
+            // Show login form
+            const loginForm = `
+                <div id="candidateLogin">
+                    <div class="form-container">
+                        <h2 class="dashboard-title">Login do Candidato</h2>
+                        <form id="candidateLoginForm">
+                            <div class="form-group">
+                                <label>CPF</label>
+                                <input type="text" class="form-control" id="loginCPF" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Senha</label>
+                                <input type="password" class="form-control" id="loginCandidatePassword" required>
+                            </div>
+                            <button type="submit" class="save-btn">Entrar</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', loginForm);
+            
+            document.getElementById('candidateLoginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const savedCandidate = JSON.parse(localStorage.getItem('candidateData'));
+                
+                if (savedCandidate && 
+                    savedCandidate.cpf === document.getElementById('loginCPF').value && 
+                    savedCandidate.password === document.getElementById('loginCandidatePassword').value) {
+                    alert('Login realizado com sucesso!');
+                    document.getElementById('candidateLogin').remove();
+                    document.getElementById('candidateDashboard').style.display = 'block';
+                } else {
+                    alert('CPF ou senha incorretos!');
+                }
+            });
+        } else {
+            // Show registration form
+            const registrationForm = `
+                <div id="candidateRegistration">
+                    <div class="form-container">
+                        <h2 class="dashboard-title">Cadastro do Candidato</h2>
                         <form id="candidateRegistrationForm">
                             <div class="form-group">
                                 <label>Nome Completo</label>
@@ -598,124 +904,173 @@
                                 <input type="text" class="form-control" id="candidateCPF" required>
                             </div>
                             <div class="form-group">
-                                <label>Data de Nascimento</label>
-                                <input type="date" class="form-control" id="candidateBirth" required>
-                            </div>
-                            <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" id="candidateEmail" required>
                             </div>
                             <div class="form-group">
-                                <label>Telefone</label>
-                                <input type="tel" class="form-control" id="candidatePhone" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Endereço</label>
-                                <input type="text" class="form-control" id="candidateAddress" required>
+                                <label>Senha</label>
+                                <input type="password" class="form-control" id="candidatePassword" required>
                             </div>
                             <button type="submit" class="save-btn">Cadastrar</button>
                         </form>
                     </div>
-                </div>`;
-
-                document.body.insertAdjacentHTML('beforeend', registrationHTML);
-
-                document.getElementById('candidateRegistrationForm').addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const candidateData = {
-                        name: document.getElementById('candidateName').value,
-                        cpf: document.getElementById('candidateCPF').value,
-                        birth: document.getElementById('candidateBirth').value,
-                        email: document.getElementById('candidateEmail').value,
-                        phone: document.getElementById('candidatePhone').value,
-                        address: document.getElementById('candidateAddress').value
-                    };
-
-                    localStorage.setItem('candidateData', JSON.stringify(candidateData));
-                    alert('Cadastro realizado com sucesso!');
-
-                    document.getElementById('candidateRegistration').remove();
-                    candidateDashboard.style.display = 'block';
-                });
-            }
-
-            function showCandidateLogin() {
-                mainContent.style.display = 'none';
-                const loginHTML = `
-                <div id="candidateLogin" class="dashboard">
-                    <h2 class="dashboard-title">Login de Candidato</h2>
-                    <div class="form-container">
-                        <form id="candidateLoginForm">
-                            <div class="form-group">
-                                <label>CPF</label>
-                                <input type="text" class="form-control" id="loginCandidateCPF" required >
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" id="loginCandidateEmail" required>
-                            </div>
-                            <button type="submit" class="save-btn">Entrar</button>
-                        </form>
-                    </div>
-                </div>`;
-
-                document.body.insertAdjacentHTML('beforeend', loginHTML);
-
-                document.getElementById('candidateLoginForm').addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const savedCandidate = JSON.parse(localStorage.getItem('candidateData'));
-
-                    if (savedCandidate &&
-                        savedCandidate.cpf === document.getElementById('loginCandidateCPF').value &&
-                        savedCandidate.email === document.getElementById('loginCandidateEmail').value) {
-                        document.getElementById('candidateLogin').remove();
-                        candidateDashboard.style.display = 'block';
-                    } else {
-                        alert('CPF ou email incorretos');
-                    }
-                });
-            }
-
-            portalCards.forEach(card => {
-                card.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    mainContent.style.display = 'none';
-                    aboutContent.style.display = 'none';
-                    supportContent.style.display = 'none';
-
-                    if (this.getAttribute('href').includes('empresa')) {
-                        showCompanyChoiceDialog();
-                    } else if (this.getAttribute('href').includes('candidato')) {
-                        const choice = confirm("Você já possui cadastro?\n\nOK = Sim, fazer login\nCancelar = Não, fazer cadastro");
-                        if (choice) {
-                            showCandidateLogin();
-                        } else {
-                            showCandidateRegistration();
-                        }
-                        companyDashboard.style.display = 'none';
-                        companyRegistration.style.display = 'none';
-                    } else if (this.id === 'viewJobsCard') {
-                        showJobListings();
-                    }
-                });
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', registrationForm);
+            
+            document.getElementById('candidateRegistrationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const candidateData = {
+                    name: document.getElementById('candidateName').value,
+                    cpf: document.getElementById('candidateCPF').value,
+                    email: document.getElementById('candidateEmail').value,
+                    password: document.getElementById('candidatePassword').value
+                };
+                
+                localStorage.setItem('candidateData', JSON.stringify(candidateData));
+                alert('Cadastro realizado com sucesso!');
+                
+                document.getElementById('candidateRegistration').remove();
+                document.getElementById('candidateDashboard').style.display = 'block';
             });
-
-            function showJobListings() {
-                mainContent.style.display = 'none';
-                companyDashboard.style.display = 'none';
-                candidateDashboard.style.display = 'none';
-                aboutContent.style.display = 'none';
-                supportContent.style.display = 'none';
-                jobListingsContainer.style.display = 'block';
-
-                // Obtenha as vagas do localStorage
-                const jobListings = JSON.parse(localStorage.getItem('jobListings')) || [];
-                const jobSuggestionsDiv = document.getElementById('jobSuggestions');
-
-                if (jobListings.length === 0) {
-                    jobSuggestionsDiv.innerHTML = '<p>Nenhuma vaga disponível no momento.</p>';
-                } else {
-                    jobSuggestionsDiv.innerHTML = jobListings.map(job => `
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const portalCards = document.querySelectorAll('.portal-card');
+        const mainContent = document.getElementById('mainContent');
+        const companyDashboard = document.getElementById('companyDashboard');
+        const candidateDashboard = document.getElementById('candidateDashboard');
+        const aboutContent = document.getElementById('aboutContent');
+        const companyRegistration = document.getElementById('companyRegistration');
+        const supportContent = document.getElementById('supportContent');
+        
+        let jobListings = JSON.parse(localStorage.getItem('jobListings')) || [];
+        
+        portalCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideAllDashboards();
+                
+                if (this.getAttribute('href').includes('empresa')) {
+                    showCompanyChoiceDialog();
+                } else if (this.getAttribute('href').includes('candidato')) {
+                    showCandidateChoiceDialog();
+                } else if (this.getAttribute('href').includes('vagas')) {
+                    showAvailableJobs();
+                }
+            });
+        });
+    
+        document.querySelector('a[href*="sobre"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllDashboards();
+            aboutContent.style.display = 'block';
+        });
+    
+        document.querySelector('a[href*="suporte"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllDashboards();
+            supportContent.style.display = 'block';
+        });
+    
+        document.querySelector('.navbar-brand').addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllDashboards();
+            mainContent.style.display = 'block';
+        });
+    
+        document.getElementById('companyRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const companyData = {
+                name: document.getElementById('companyName').value,
+                cnpj: document.getElementById('companyCNPJ').value,
+                email: document.getElementById('companyEmail').value,
+                phone: document.getElementById('companyPhone').value,
+                address: document.getElementById('companyAddress').value,
+                password: document.getElementById('companyPassword').value
+            };
+            
+            localStorage.setItem('companyData', JSON.stringify(companyData));
+            alert('Empresa cadastrada com sucesso!');
+            
+            companyRegistration.style.display = 'none';
+            companyDashboard.style.display = 'block';
+        });
+    
+        document.getElementById('jobForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const companyData = JSON.parse(localStorage.getItem('companyData')) || {};
+            
+            const jobData = {
+                id: Date.now().toString(),
+                title: document.getElementById('jobTitle').value,
+                description: document.getElementById('jobDescription').value,
+                sector: document.getElementById('jobSector').value,
+                skills: document.getElementById('jobSkills').value.split(',').map(s => s.trim()),
+                company: companyData.name || 'Empresa não especificada'
+            };
+            
+            addJobListing(jobData);
+            alert('Vaga publicada com sucesso!');
+            this.reset();
+        });
+    
+        function addJobListing(jobData) {
+            jobListings.push(jobData);
+            localStorage.setItem('jobListings', JSON.stringify(jobListings));
+            updateJobSuggestions();
+        }
+    
+        function showAvailableJobs() {
+            hideAllDashboards();
+            
+            const jobsHTML = `
+                <div class="dashboard" style="display: block;">
+                    <h2 class="dashboard-title">Vagas Disponíveis</h2>
+                    <div class="dashboard-section">
+                        <div class="form-container">
+                            <div class="form-group">
+                                <label>Filtrar por Setor:</label>
+                                <select class="form-control" id="publicJobSectorFilter">
+                                    <option value="">Todos os Setores</option>
+                                    <option value="tecnologia">Tecnologia</option>
+                                    <option value="administracao">Administração</option>
+                                    <option value="financeiro">Financeiro</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="vendas">Vendas</option>
+                                    <option value="rh">Recursos Humanos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="publicJobList">
+                            ${jobListings.length > 0 ? 
+                                jobListings.map(job => `
+                                    <div class="job-card">
+                                        <h3>${job.title}</h3>
+                                        <p><strong>Empresa:</strong> ${job.company}</p>
+                                        <p><strong>Setor:</strong> ${job.sector}</p>
+                                        <p><strong>Descrição:</strong> ${job.description}</p>
+                                        <p><strong>Habilidades:</strong> ${job.skills.join(', ')}</p>
+                                        <button onclick="applyToJob('${job.id}')" class="btn btn-primary">Aplicar</button>
+                                    </div>
+                                `).join('') 
+                                : '<p style="text-align: center; padding: 20px; font-size: 1.2rem; color: #666;">Nenhuma vaga disponível no momento.</p>'
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', jobsHTML);
+            
+            document.getElementById('publicJobSectorFilter')?.addEventListener('change', function() {
+                const sector = this.value;
+                const filteredJobs = sector ? 
+                    jobListings.filter(job => job.sector.toLowerCase() === sector.toLowerCase()) : 
+                    jobListings;
+                    
+                document.getElementById('publicJobList').innerHTML = filteredJobs.length > 0 ? 
+                    filteredJobs.map(job => `
                         <div class="job-card">
                             <h3>${job.title}</h3>
                             <p><strong>Empresa:</strong> ${job.company}</p>
@@ -724,18 +1079,18 @@
                             <p><strong>Habilidades:</strong> ${job.skills.join(', ')}</p>
                             <button onclick="applyToJob('${job.id}')" class="btn btn-primary">Aplicar</button>
                         </div>
-                    `).join('');
-                }
-            }
-
-            // Adicionar o evento de clique no card de Vagas Disponíveis
-            document.getElementById('viewJobsCard').addEventListener('click', function (e) {
-                e.preventDefault();
-                showJobListings();
+                    `).join('') 
+                    : '<p style="text-align: center; padding: 20px; font-size: 1.2rem; color: #666;">Nenhuma vaga encontrada para este setor.</p>';
             });
+        }
+    
+        document.getElementById('supportForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Nossa equipe responderá em até 24 horas.');
+            this.reset();
         });
+    });
     </script>
-
-</body>
-
-</html>
+    
+    </body>
+    </html>
